@@ -25,7 +25,7 @@ import {
   type GpoRecord,
 } from '../lib/firebase';
 
-const INTEREST_RATE = 0.003;
+const INTEREST_RATE = 0.005;
 const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD || 'gpo@2024';
 
 function maskGpo(gpo: unknown): string {
