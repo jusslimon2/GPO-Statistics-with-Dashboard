@@ -1,14 +1,27 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc, query, orderBy, writeBatch } from 'firebase/firestore';
+import { getFirestore, collection, getDocs, doc, updateDoc, deleteDoc, query, orderBy, writeBatch } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY ?? "AIzaSyDuz2AidAjBqEkoKvUOvEFXPvOEEXY5mps",
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN ?? "gpo-dashboard-d71da.firebaseapp.com",
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID ?? "gpo-dashboard-d71da",
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET ?? "gpo-dashboard-d71da.firebasestorage.app",
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID ?? "526678782097",
-  appId: import.meta.env.VITE_FIREBASE_APP_ID ?? "1:526678782097:web:eacc6cbe6e2d675f39cf30",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
+
+// Warn if any required env var is missing to help debugging local setups.
+const missing: string[] = [];
+if (!firebaseConfig.apiKey) missing.push('VITE_FIREBASE_API_KEY');
+if (!firebaseConfig.authDomain) missing.push('VITE_FIREBASE_AUTH_DOMAIN');
+if (!firebaseConfig.projectId) missing.push('VITE_FIREBASE_PROJECT_ID');
+if (!firebaseConfig.storageBucket) missing.push('VITE_FIREBASE_STORAGE_BUCKET');
+if (!firebaseConfig.messagingSenderId) missing.push('VITE_FIREBASE_MESSAGING_SENDER_ID');
+if (!firebaseConfig.appId) missing.push('VITE_FIREBASE_APP_ID');
+if (missing.length) {
+  // eslint-disable-next-line no-console
+  console.warn('[firebase] Missing env vars:', missing.join(', '));
+}
 
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
