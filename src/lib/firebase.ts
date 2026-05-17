@@ -2,12 +2,12 @@ import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc, query, orderBy, writeBatch } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDuz2AidAjBqEkoKvUOvEFXPvOEEXY5mps",
-  authDomain: "gpo-dashboard-d71da.firebaseapp.com",
-  projectId: "gpo-dashboard-d71da",
-  storageBucket: "gpo-dashboard-d71da.firebasestorage.app",
-  messagingSenderId: "526678782097",
-  appId: "1:526678782097:web:eacc6cbe6e2d675f39cf30"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY ?? "AIzaSyDuz2AidAjBqEkoKvUOvEFXPvOEEXY5mps",
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN ?? "gpo-dashboard-d71da.firebaseapp.com",
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID ?? "gpo-dashboard-d71da",
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET ?? "gpo-dashboard-d71da.firebasestorage.app",
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID ?? "526678782097",
+  appId: import.meta.env.VITE_FIREBASE_APP_ID ?? "1:526678782097:web:eacc6cbe6e2d675f39cf30",
 };
 
 const app = initializeApp(firebaseConfig);
@@ -37,7 +37,7 @@ export async function fetchAllRecords(): Promise<GpoDoc[]> {
       id: d.id,
       batchId: data.batchId || '',
       gpo: data.gpo || '',
-      interestRate: data.interestRate ?? 0.003,
+      interestRate: data.interestRate ?? 0.005,
       profit: data.profit ?? 0,
       usedLimit: data.usedLimit ?? 0,
       createdAt: data.createdAt || '',
