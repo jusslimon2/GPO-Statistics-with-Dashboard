@@ -41,6 +41,13 @@ export interface GpoDoc extends GpoRecord {
 
 const COLLECTION = 'gpo_statistics';
 
+function normalizeInterestRate(value: unknown): number {
+  const rate = typeof value === 'number' ? value : Number(value);
+  if (Number.isNaN(rate) || rate <= 0) return 0.005;
+  if (rate < 0.004) return 0.005;
+  return rate;
+}
+
 export async function fetchAllRecords(): Promise<GpoDoc[]> {
   const q = query(collection(db, COLLECTION), orderBy('createdAt', 'desc'));
   const snap = await getDocs(q);
@@ -50,7 +57,7 @@ export async function fetchAllRecords(): Promise<GpoDoc[]> {
       id: d.id,
       batchId: data.batchId || '',
       gpo: data.gpo || '',
-      interestRate: data.interestRate ?? 0.005,
+      interestRate: normalizeInterestRate(data.interestRate ?? 0.005),
       profit: data.profit ?? 0,
       usedLimit: data.usedLimit ?? 0,
       createdAt: data.createdAt || '',
