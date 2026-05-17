@@ -337,11 +337,11 @@ export default function Admin() {
           <div className="flex items-center gap-3">
             {hasIcon ? (
               <div className="flex items-center">
-                <img src="/icon.png" alt="GPO" className="w-5 h-5 object-contain" />
+                <img src="/icon.png" alt="GPO" className="w-12 h-12 object-contain" />
               </div>
             ) : (
               <div className="p-2 bg-slate-800 rounded">
-                <BarChart3 className="w-5 h-5 text-white" />
+                <BarChart3 className="w-8 h-8 text-white" />
               </div>
             )}
             <div>
